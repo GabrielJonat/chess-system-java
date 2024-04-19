@@ -1,7 +1,11 @@
 package application;
 
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class UI {
 
@@ -47,4 +51,17 @@ public class UI {
         }
         System.out.print(" ");
     }
+
+    public static ChessPosition readChessPosition(Scanner sc){
+        try{
+            String userInput = sc.nextLine();
+            char column = userInput.charAt(0);
+            int row = Integer.parseInt(userInput.substring(1));
+            return new ChessPosition(column, row);
+        }
+        catch (RuntimeException e){
+            throw new InputMismatchException("Error reading ChessPosition: valid positions only range from a1 to h8");
+        }
+    }
+
 }
